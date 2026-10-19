@@ -1,4 +1,34 @@
-# tri_cat
+# tri_cat 
+
+## open questions
+
+- it's both written in the description that it should be a small and pragmatic solution but later on it's requested to have an extendable (for different shapes?), production-ready one, which sounds very vague. (what is needed? a full project, packaging, logging, testing, a full spring server?)
+- There's no mention about the validation of input and about the corner case of degenerate triangles (a+b=c), for which I don't know if it can still possibly be isosceles or scalene.
+- There's no mention of how input and output should be given, if by a file, stdin, stdout, parameters and what is the structure of the input apart "3 numbers" (if by file, comma separated? structured json? etc..)
+
+
+## assumptions
+
+- input is read from stdin as 3 numbers each followed by a newline
+- output is written on stdout
+- validation was not explicitly requested
+  - sides are non-null positive numbers
+  - each pair of sides must have sum greater than the remaining side
+  - degenerate triangles (a+b=c) are NOT valid
+- objective asked for a production-ready app; what was added:
+  - this is a maven project with java 21 
+  - some degree of separation and potentially IoC
+  - simple logging
+  - unit testing
+- data was kept simple with just a Triangle class, there could be some kind of Shape with an array of sides but I decided to enforce 3 values for ease of completion
+
+
+# other notes
+
+- as stated, only side length is taken into account for categorization, angles are ignored
+
+
+## run and commands
 
 Build + test:  mvn package          (produces target/tri_cat.jar, self-contained)
 Tests only:    mvn test
