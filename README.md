@@ -23,9 +23,10 @@
 - data was kept simple with just a Triangle class, there could be some kind of Shape with an array of sides but I decided to enforce 3 values for ease of completion
 
 
-# other notes
+## other notes
 
 - as stated, only side length is taken into account for categorization, angles are ignored
+- AI was used only for the boilerplate code and for research on types and validation of triangles
 
 
 ## run and commands
