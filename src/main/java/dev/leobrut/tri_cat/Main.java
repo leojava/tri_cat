@@ -1,14 +1,6 @@
 package dev.leobrut.tri_cat;
 
-import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Properties;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
