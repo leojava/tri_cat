@@ -1,12 +1,13 @@
 package dev.leobrut.tri_cat;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayInputStream;
 import java.math.BigDecimal;
-import org.junit.jupiter.api.Test;
+
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class InputReaderTest {
 
@@ -16,36 +17,36 @@ class InputReaderTest {
 
     @Test
     void readsThreeNumbersOnSeparateLines() {
-        var n = readerOf("1\n2.5\n-3\n").read();
+        var triangle = readerOf("1\n2.5\n-3\n").read();
 
-        assertThat(n.first()).isEqualTo(new BigDecimal("1"));
-        assertThat(n.second()).isEqualTo(new BigDecimal("2.5"));
-        assertThat(n.third()).isEqualTo(new BigDecimal("-3"));
+        assertThat(triangle.sideA()).isEqualTo(new BigDecimal("1"));
+        assertThat(triangle.sideB()).isEqualTo(new BigDecimal("2.5"));
+        assertThat(triangle.sideC()).isEqualTo(new BigDecimal("-3"));
     }
 
     @Test
     void readsThreeNumbersOnOneLineWithMixedWhitespace() {
-        var n = readerOf("  1   2\t3 \n").read();
+        var triangle = readerOf("  1   2\t3 \n").read();
 
-        assertThat(n.first()).isEqualByComparingTo("1");
-        assertThat(n.second()).isEqualByComparingTo("2");
-        assertThat(n.third()).isEqualByComparingTo("3");
+        assertThat(triangle.sideA()).isEqualByComparingTo("1");
+        assertThat(triangle.sideB()).isEqualByComparingTo("2");
+        assertThat(triangle.sideC()).isEqualByComparingTo("3");
     }
 
     @Test
     void keepsFullPrecision() {
-        var n = readerOf("0.1 12345678901234567890.123456789 1e3").read();
+        var triangle = readerOf("0.1 12345678901234567890.123456789 1e3").read();
 
-        assertThat(n.first()).isEqualTo(new BigDecimal("0.1"));
-        assertThat(n.second()).isEqualTo(new BigDecimal("12345678901234567890.123456789"));
-        assertThat(n.third()).isEqualByComparingTo("1000");
+        assertThat(triangle.sideA()).isEqualTo(new BigDecimal("0.1"));
+        assertThat(triangle.sideB()).isEqualTo(new BigDecimal("12345678901234567890.123456789"));
+        assertThat(triangle.sideC()).isEqualByComparingTo("1000");
     }
 
     @Test
     void ignoresInputAfterTheThirdNumber() {
-        var n = readerOf("1 2 3 4 not-a-number").read();
+        var triangle = readerOf("1 2 3 4 not-a-number").read();
 
-        assertThat(n.third()).isEqualByComparingTo("3");
+        assertThat(triangle.sideC()).isEqualByComparingTo("3");
     }
 
     @Test

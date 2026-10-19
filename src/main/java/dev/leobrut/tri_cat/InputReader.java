@@ -15,9 +15,6 @@ import java.util.Scanner;
  */
 public final class InputReader {
 
-    /** The three values that were read, in input order. */
-    public record Numbers(BigDecimal first, BigDecimal second, BigDecimal third) {}
-
     private static final int COUNT = 3;
 
     private final InputStream in;
@@ -33,7 +30,7 @@ public final class InputReader {
     /**
      * @throws IllegalArgumentException if fewer than three numbers are available or a token is not a number
      */
-    public Numbers read() {
+    public Triangle read() {
         // Deliberately not closed: closing the scanner would also close System.in.
         Scanner scanner = new Scanner(in, StandardCharsets.UTF_8);
 
@@ -45,7 +42,7 @@ public final class InputReader {
             throw new IllegalArgumentException(
                     "expected " + COUNT + " numbers on stdin, got " + values.size());
         }
-        return new Numbers(values.get(0), values.get(1), values.get(2));
+        return new Triangle(values.get(0), values.get(1), values.get(2));
     }
 
     private static BigDecimal parse(String token) {
