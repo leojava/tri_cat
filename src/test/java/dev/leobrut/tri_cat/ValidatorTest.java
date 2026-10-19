@@ -14,6 +14,22 @@ class ValidatorTest {
     @ParameterizedTest
     @CsvSource(
             textBlock = """
+                    ,1,1
+                    1,,1
+                    1,1,
+                    """
+    )
+    void testNullSidesAreInvalid(BigDecimal sideA, BigDecimal sideB, BigDecimal sideC) {
+        log.debug("{} {} {}", sideA, sideB, sideC);
+        Triangle triangle = new Triangle(sideA, sideB, sideC);
+        Validator validator = new Validator();
+        Assertions.assertThat(validator.isTriangleValid(triangle))
+                .isFalse();
+    }
+
+    @ParameterizedTest
+    @CsvSource(
+            textBlock = """
                     -1,1,1
                     1,-1,1
                     1,1,-1

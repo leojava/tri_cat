@@ -30,7 +30,7 @@ public class Validator {
     }
 
     private boolean isSideValid(BigDecimal side, String name) {
-        if (side.signum() > 0) {
+        if (side!=null && side.signum() > 0) {
             log.debug("side {} is valid", name);
             return true;
         }
